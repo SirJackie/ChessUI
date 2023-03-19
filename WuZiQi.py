@@ -4,17 +4,23 @@ from NativeAPI import EnableHighDPISupport, GetScreenResolution
 
 # Preferences
 highDPI = True
-screenResolution = GetScreenResolution()
+
 if highDPI:
-    halfGridSize = int(0.05 * screenResolution[1])
+    scalingFactor = EnableHighDPISupport()
+else:
+    scalingFactor = 100
+
+screenResolution = GetScreenResolution()
+print(screenResolution)
+if highDPI:
+    halfGridSize = int(0.03 * screenResolution[1])
 else:
     halfGridSize = 15
+print(halfGridSize)
 
 
 def CreateWindow(width, height, title):
     root = tk.Tk()
-    if highDPI:
-        EnableHighDPISupport(root)
     root.geometry(str(width) + "x" + str(height))
     root.title(title)
     return root

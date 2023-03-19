@@ -1,11 +1,14 @@
 import ctypes
 
 
-def EnableHighDPISupport(root):
+def EnableHighDPISupport():
     ctypes.windll.shcore.SetProcessDpiAwareness(1)
-    scaleFactor = ctypes.windll.shcore.GetScaleFactorForDevice(0)
-    root.tk.call('tk', 'scaling', scaleFactor/75)
-    return scaleFactor
+    scalingFactor = ctypes.windll.shcore.GetScaleFactorForDevice(0)
+    return scalingFactor
+
+
+def EnableTkinterHighDPISupport(root, scalingFactor):
+    root.tk.call('tk', 'scaling', scalingFactor / 75)
 
 
 def GetScreenResolution():
