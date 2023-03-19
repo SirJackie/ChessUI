@@ -12,9 +12,12 @@ hasNewAction = False
 wannaClose = False
 closeBridgeServer = False
 
+size = None
+hasNewSize = False
+
 
 def ControllerServer():
-    global state, hasNewState, action, hasNewAction
+    global state, hasNewState, action, hasNewAction, size, hasNewSize
     global closeBridgeServer, wannaClose
 
     jsock = JSock()
@@ -33,6 +36,11 @@ def ControllerServer():
                         state = json.loads(jsock.RecvStr())
                         hasNewState = True
                         print(state)
+
+                    elif msg == "SetSize":
+                        size = json.loads(jsock.RecvStr())
+                        hasNewSize = True
+                        print("Size:", size)
 
                     elif msg == "GetAction":
                         if hasNewAction:
@@ -57,7 +65,7 @@ def ControllerServer():
 
 
 def ControleeServer():
-    global state, hasNewState, action, hasNewAction
+    global state, hasNewState, action, hasNewAction, size, hasNewSize
     global closeBridgeServer, wannaClose
 
     jsock = JSock()
@@ -88,6 +96,13 @@ def ControleeServer():
                             hasNewState = False
                         else:
                             jsock.SendStr("NoNewState")
+
+                    elif msg == "GetSize":
+                        if hasNewSize:
+                            jsock.SendStr(json.dumps(size))
+                            hasNewSize = False
+                        else:
+                            jsock.SendStr("NoNewSize")
 
                     elif msg == "SetAction":
                         action = json.loads(jsock.RecvStr())

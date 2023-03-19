@@ -22,7 +22,12 @@ def GetAction():
 
 # print(GetAction())
 
-jsock.SendStr("SetState")
+# jsock.SendStr("SetState")
+# jsock.SendStr(json.dumps(
+#     [[0, 1, 2], [11, 12, 6], [7, 8, 9]]
+# ))
+
+jsock.SendStr("SetSize")
 jsock.SendStr(json.dumps(
-    [[0, 1, 2], [11, 12, 6], [7, 8, 9]]
+    [5, 3]
 ))

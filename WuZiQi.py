@@ -2,6 +2,7 @@ import tkinter as tk
 from NativeAPI import EnableHighDPISupport, GetScreenResolution
 import json
 from JSock import JSock
+import time
 
 # Preferences
 highDPI = True
@@ -115,8 +116,23 @@ if __name__ == "__main__":
         halfGridSize = 15
     print(halfGridSize)
 
-    width = 9
-    height = 9
+    # Get Chessboard Size
+    jsock = JSock()
+    jsock.Connect("127.0.0.1", 16521)
+    width = None
+    height = None
+    while True:
+        jsock.SendStr("GetSize")
+        result = jsock.RecvStr()
+        print(result)
+        if result != "NoNewSize":
+            result = json.loads(result)
+            width = result[0]
+            height = result[1]
+            break
+        else:
+            time.sleep(0.01)
+
     winWidth = width * 2 * halfGridSize
     winHeight = height * 2 * halfGridSize
 
@@ -128,8 +144,6 @@ if __name__ == "__main__":
     canvas.bind("<Button-1>", MouseClickCallback)
 
     # Set Network Socket Interval
-    jsock = JSock()
-    jsock.Connect("127.0.0.1", 16521)
     root.after(1, IntervalFunction)
 
     root.mainloop()
