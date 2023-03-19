@@ -1,10 +1,10 @@
 import os
 import json
-from JSock import JSock
+from ChessUI.JSock import JSock
 import time
 
-os.system("start Launcher1.vbs")
-os.system("start Launcher2.vbs")
+os.system("start .\\ChessUI\\Launcher1.vbs")
+os.system("start .\\ChessUI\\Launcher2.vbs")
 
 jsock = JSock()
 jsock.Connect("127.0.0.1", 16520)
