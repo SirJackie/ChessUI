@@ -1,9 +1,14 @@
 import tkinter as tk
-from tkinter import PhotoImage
+from NativeAPI import EnableHighDPISupport, GetScreenResolution
+
+
+highDPI = True
 
 
 def CreateWindow(width, height, title):
     root = tk.Tk()
+    if highDPI:
+        EnableHighDPISupport(root)
     root.geometry(str(width) + "x" + str(height))
     root.title(title)
     return root
@@ -15,19 +20,30 @@ def CreateCanvas(root, x, y, width, height):
     return canvas
 
 
-def CreateCircle(canvas, x, y, color):
-    canvas.create_oval(x + 2, y + 2, x + 28, y + 28, fill=color, outline=color)
+def CreateCircle(canvas, x, y, width, color):
+    tkOffsetBugfix = int(0.13 * width)
+    canvas.create_oval(
+        x + tkOffsetBugfix,
+        y + tkOffsetBugfix,
+        x + tkOffsetBugfix + width,
+        y + tkOffsetBugfix + width,
+        fill=color, outline=color
+    )
 
 
 def CreatePiece(canvas, i, j, halfGridSize, color):
     y = i
     x = j
-    CreateCircle(canvas, x * 2 * halfGridSize, y * 2 * halfGridSize, color)
+    CreateCircle(canvas, x * 2 * halfGridSize, y * 2 * halfGridSize, int(0.85 * halfGridSize * 2), color)
 
 
 width = 9
 height = 9
-halfGridSize = 15
+screenResolution = GetScreenResolution()
+if highDPI:
+    halfGridSize = int(0.05 * screenResolution[1])
+else:
+    halfGridSize = 15
 winWidth = width * 2 * halfGridSize
 winHeight = height * 2 * halfGridSize
 
