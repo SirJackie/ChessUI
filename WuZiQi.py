@@ -5,6 +5,8 @@ from JSock import JSock
 
 # Preferences
 highDPI = True
+root = None
+jsock = None
 
 
 def CreateWindow(width, height, title):
@@ -45,10 +47,10 @@ def MouseClickCallback(event):
     print(i, j)
 
     CreatePiece(canvas, i, j, halfGridSize, color="black")
-
-
-root = None
-jsock = None
+    jsock.SendStr("SetAction")
+    jsock.SendStr(json.dumps(
+        [i, j]
+    ))
 
 
 def IntervalFunction():
