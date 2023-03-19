@@ -5,19 +5,6 @@ from NativeAPI import EnableHighDPISupport, GetScreenResolution
 # Preferences
 highDPI = True
 
-if highDPI:
-    scalingFactor = EnableHighDPISupport()
-else:
-    scalingFactor = 100
-
-screenResolution = GetScreenResolution()
-print(screenResolution)
-if highDPI:
-    halfGridSize = int(0.03 * screenResolution[1])
-else:
-    halfGridSize = 15
-print(halfGridSize)
-
 
 def CreateWindow(width, height, title):
     root = tk.Tk()
@@ -60,6 +47,18 @@ def MouseClickCallback(event):
 
 
 if __name__ == "__main__":
+    if highDPI:
+        EnableHighDPISupport()
+
+    screenResolution = GetScreenResolution()
+    print(screenResolution)
+
+    if highDPI:
+        halfGridSize = int(0.03 * screenResolution[1])
+    else:
+        halfGridSize = 15
+    print(halfGridSize)
+
     width = 9
     height = 9
     winWidth = width * 2 * halfGridSize
