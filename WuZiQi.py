@@ -61,6 +61,18 @@ def IntervalFunction():
     if result == "Yes":
         root.destroy()
 
+    # GetState
+    jsock.SendStr("GetState")
+    result = jsock.RecvStr()
+    if result != "NoNewState":
+        result = json.loads(result)
+        for i in range(0, len(result)):
+            for j in range(0, len(result[i])):
+                if result[i][j] == 1:
+                    CreatePiece(canvas, i, j, halfGridSize, color="black")
+                elif result[i][j] == 2:
+                    CreatePiece(canvas, i, j, halfGridSize, color="white")
+
     root.after(1, IntervalFunction)
 
 
