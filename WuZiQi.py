@@ -7,6 +7,7 @@ from JSock import JSock
 highDPI = True
 root = None
 jsock = None
+canvas = None
 
 
 def CreateWindow(width, height, title):
@@ -39,6 +40,26 @@ def CreatePiece(canvas, i, j, halfGridSize, color):
     CreateCircle(canvas, x * 2 * halfGridSize, y * 2 * halfGridSize, int(0.85 * halfGridSize * 2), color)
 
 
+def RedrawChessboard(canvas):
+    canvas.delete("all")
+
+    # Horizontal
+    for dy in range(0, height):
+        x1 = halfGridSize
+        y1 = halfGridSize + dy * 2 * halfGridSize
+        x2 = halfGridSize + (width - 1) * 2 * halfGridSize
+        y2 = halfGridSize + dy * 2 * halfGridSize
+        canvas.create_line(x1, y1, x2, y2)
+
+    # Vertical
+    for dx in range(0, width):
+        x1 = halfGridSize + dx * 2 * halfGridSize
+        y1 = halfGridSize
+        x2 = halfGridSize + dx * 2 * halfGridSize
+        y2 = halfGridSize + (height - 1) * 2 * halfGridSize
+        canvas.create_line(x1, y1, x2, y2)
+
+
 def MouseClickCallback(event):
     mx, my = event.x, event.y
 
@@ -46,7 +67,7 @@ def MouseClickCallback(event):
     j = mx // (2 * halfGridSize)
     print(i, j)
 
-    CreatePiece(canvas, i, j, halfGridSize, color="black")
+    # CreatePiece(canvas, i, j, halfGridSize, color="black")
     jsock.SendStr("SetAction")
     jsock.SendStr(json.dumps(
         [i, j]
@@ -65,6 +86,7 @@ def IntervalFunction():
     jsock.SendStr("GetState")
     result = jsock.RecvStr()
     if result != "NoNewState":
+        RedrawChessboard(canvas)
         result = json.loads(result)
         for i in range(0, len(result)):
             for j in range(0, len(result[i])):
@@ -97,21 +119,7 @@ if __name__ == "__main__":
     root = CreateWindow(winWidth, winHeight, "ChessUI")
     canvas = CreateCanvas(root, 0, 0, winWidth, winHeight)
 
-    # Horizontal
-    for dy in range(0, height):
-        x1 = halfGridSize
-        y1 = halfGridSize + dy * 2 * halfGridSize
-        x2 = halfGridSize + (width - 1) * 2 * halfGridSize
-        y2 = halfGridSize + dy * 2 * halfGridSize
-        canvas.create_line(x1, y1, x2, y2)
-
-    # Vertical
-    for dx in range(0, width):
-        x1 = halfGridSize + dx * 2 * halfGridSize
-        y1 = halfGridSize
-        x2 = halfGridSize + dx * 2 * halfGridSize
-        y2 = halfGridSize + (height - 1) * 2 * halfGridSize
-        canvas.create_line(x1, y1, x2, y2)
+    RedrawChessboard(canvas)
 
     canvas.bind("<Button-1>", MouseClickCallback)
 
