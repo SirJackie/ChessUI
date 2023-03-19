@@ -8,7 +8,7 @@ class ChessUI:
 
     jsock = None
 
-    def __init__(self, width, height):
+    def __init__(self, i, j):  # i行, j列; width=j, height=i
         # Start Bridge Server and Tkinter Controlee Processes
         os.system("start .\\ChessUI\\Launcher1.vbs")
         os.system("start .\\ChessUI\\Launcher2.vbs")
@@ -20,7 +20,7 @@ class ChessUI:
         # Send SetSize Request
         self.jsock.SendStr("SetSize")
         self.jsock.SendStr(json.dumps(
-            [9, 9]
+            [j, i]  # width=j, height=i
         ))
 
     def GetAction(self):

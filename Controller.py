@@ -1,7 +1,7 @@
 from ChessUI.ChessUI import ChessUI
 
-state = [[0 for j in range(0, 9)] for i in range(0, 9)]
-ui = ChessUI(9, 9)
+state = [[0 for j in range(0, 10)] for i in range(0, 5)]
+ui = ChessUI(5, 10)
 
 while True:
     i, j = ui.GetAction()
