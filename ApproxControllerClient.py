@@ -24,5 +24,5 @@ def GetAction():
 
 jsock.SendStr("SetState")
 jsock.SendStr(json.dumps(
-    [[2, 0, 3], [4, 5, 6], [7, 8, 9]]
+    [[0, 1, 2], [11, 12, 6], [7, 8, 9]]
 ))

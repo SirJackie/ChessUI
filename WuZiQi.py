@@ -23,21 +23,21 @@ def CreateCanvas(root, x, y, width, height):
     return canvas
 
 
-def CreateCircle(canvas, x, y, width, color):
+def CreateCircle(canvas, x, y, width, fill, outline):
     tkOffsetBugfix = int(0.13 * width)
     canvas.create_oval(
         x + tkOffsetBugfix,
         y + tkOffsetBugfix,
         x + tkOffsetBugfix + width,
         y + tkOffsetBugfix + width,
-        fill=color, outline=color
+        fill=fill, outline=outline
     )
 
 
-def CreatePiece(canvas, i, j, halfGridSize, color):
+def CreatePiece(canvas, i, j, halfGridSize, fill, outline):
     y = i
     x = j
-    CreateCircle(canvas, x * 2 * halfGridSize, y * 2 * halfGridSize, int(0.85 * halfGridSize * 2), color)
+    CreateCircle(canvas, x * 2 * halfGridSize, y * 2 * halfGridSize, int(0.85 * halfGridSize * 2), fill, outline)
 
 
 def RedrawChessboard(canvas):
@@ -67,7 +67,7 @@ def MouseClickCallback(event):
     j = mx // (2 * halfGridSize)
     print(i, j)
 
-    # CreatePiece(canvas, i, j, halfGridSize, color="black")
+    # CreatePiece(canvas, i, j, halfGridSize, fill="black", outline="black")
     jsock.SendStr("SetAction")
     jsock.SendStr(json.dumps(
         [i, j]
@@ -91,9 +91,13 @@ def IntervalFunction():
         for i in range(0, len(result)):
             for j in range(0, len(result[i])):
                 if result[i][j] == 1:
-                    CreatePiece(canvas, i, j, halfGridSize, color="black")
+                    CreatePiece(canvas, i, j, halfGridSize, fill="black", outline="black")
                 elif result[i][j] == 2:
-                    CreatePiece(canvas, i, j, halfGridSize, color="white")
+                    CreatePiece(canvas, i, j, halfGridSize, fill="white", outline="white")
+                elif result[i][j] == 11:
+                    CreatePiece(canvas, i, j, halfGridSize, fill="black", outline="red")
+                elif result[i][j] == 12:
+                    CreatePiece(canvas, i, j, halfGridSize, fill="white", outline="red")
 
     root.after(1, IntervalFunction)
 
