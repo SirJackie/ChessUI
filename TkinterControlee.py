@@ -95,9 +95,9 @@ def IntervalFunction():
                     CreatePiece(canvas, i, j, halfGridSize, fill="black", outline="black")
                 elif result[i][j] == 2:
                     CreatePiece(canvas, i, j, halfGridSize, fill="white", outline="white")
-                elif result[i][j] == 11:
+                elif result[i][j] == 3:
                     CreatePiece(canvas, i, j, halfGridSize, fill="black", outline="red")
-                elif result[i][j] == 12:
+                elif result[i][j] == 4:
                     CreatePiece(canvas, i, j, halfGridSize, fill="white", outline="red")
 
     root.after(1, IntervalFunction)

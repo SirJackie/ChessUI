@@ -49,18 +49,9 @@ def ControllerServer():
                         else:
                             jsock.SendStr("NoNewAction")
 
-                    elif msg == "CloseServer":
-                        jsock.Close()
-                        raise SystemExit("Controller Client Closed Correctly")
-
-        except SystemExit:
-            # Exited Correctly, Close the Bridge Server
-            print("Controller Client Closed Correctly, So the Bridge Server is Closing...")
-            wannaClose = True
-            print("Wanna Close")
-
         except BaseException:
-            print("An Error Occurred in Controller Server")
+            print("An Error Occurred in Controller Server, Controller Client Might Be Closed.")
+            wannaClose = True  # Set the wannaClose, wait for the Controlee to set closeBridgeServer
             pass
 
 
@@ -110,7 +101,9 @@ def ControleeServer():
                         print(action)
 
         except BaseException:
-            print("An Error Occurred in Controlee Server")
+            print("An Error Occurred in Controlee Server, Controlee Client Might Be Closed.")
+            wannaClose = True  # Set the wannaClose
+            closeBridgeServer = True  # Don't need to wait for the Controller, just set closeBridgeServer
             pass
 
 
