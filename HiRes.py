@@ -1,6 +1,6 @@
-import ctypes
 from tkinter import *
 from tkinter.ttk import *
+from NativeAPI import EnableHighDPISupport
 
 
 def fac(x):
@@ -11,9 +11,7 @@ def fac(x):
 
 
 root=Tk()
-ctypes.windll.shcore.SetProcessDpiAwareness(1)
-ScaleFactor=ctypes.windll.shcore.GetScaleFactorForDevice(0)
-root.tk.call('tk', 'scaling', ScaleFactor/75)
+EnableHighDPISupport(root)
 root.title('计算阶乘')
 frame1=Frame(root)
 frame1.pack(side='top',anchor='center',expand='yes')
