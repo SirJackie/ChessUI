@@ -1,6 +1,7 @@
 import tkinter as tk
 from NativeAPI import EnableHighDPISupport, GetScreenResolution
-
+import json
+from JSock import JSock
 
 # Preferences
 highDPI = True
@@ -46,6 +47,21 @@ def MouseClickCallback(event):
     CreatePiece(canvas, i, j, halfGridSize, color="black")
 
 
+root = None
+jsock = None
+
+
+def IntervalFunction():
+
+    # Close or Not
+    jsock.SendStr("CloseOrNot")
+    result = jsock.RecvStr()
+    if result == "Yes":
+        root.destroy()
+
+    root.after(1, IntervalFunction)
+
+
 if __name__ == "__main__":
     if highDPI:
         EnableHighDPISupport()
@@ -84,4 +100,10 @@ if __name__ == "__main__":
         canvas.create_line(x1, y1, x2, y2)
 
     canvas.bind("<Button-1>", MouseClickCallback)
+
+    # Set Network Socket Interval
+    jsock = JSock()
+    jsock.Connect("127.0.0.1", 16521)
+    root.after(1, IntervalFunction)
+
     root.mainloop()
