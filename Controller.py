@@ -3,8 +3,8 @@ import json
 from JSock import JSock
 import time
 
-os.system("start python BridgeServer.py")
-os.system("start python TkinterControlee.py")
+os.system("start Launcher1.vbs")
+os.system("start Launcher2.vbs")
 
 jsock = JSock()
 jsock.Connect("127.0.0.1", 16520)
