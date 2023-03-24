@@ -2,16 +2,27 @@ import os
 import json
 from .JSock import JSock
 import time
+from multiprocessing import Process
+from .BridgeServer import BridgeServer
+from .TkinterControlee import TkinterControlee
 
 
 class ChessUI:
 
     jsock = None
+    bridgeServer = None
+    tkinterControlee = None
 
     def __init__(self, i, j):  # i行, j列; width=j, height=i
         # Start Bridge Server and Tkinter Controlee Processes
-        os.system("start .\\ChessUI\\Launcher1.vbs")
-        os.system("start .\\ChessUI\\Launcher2.vbs")
+        # os.system("start .\\ChessUI\\Launcher1.vbs")
+        # os.system("start .\\ChessUI\\Launcher2.vbs")
+
+        self.bridgeServer = Process(target=BridgeServer)
+        self.bridgeServer.start()
+
+        self.tkinterControlee = Process(target=TkinterControlee)
+        self.tkinterControlee.start()
 
         # Connect to the Bridge Server
         self.jsock = JSock()

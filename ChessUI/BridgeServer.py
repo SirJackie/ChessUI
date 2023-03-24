@@ -1,4 +1,4 @@
-from JSock import JSock
+from .JSock import JSock
 import _thread
 import json
 import time

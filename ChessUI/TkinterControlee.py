@@ -1,7 +1,7 @@
 import tkinter as tk
-from NativeAPI import EnableHighDPISupport, GetScreenResolution
+from .NativeAPI import EnableHighDPISupport, GetScreenResolution
 import json
-from JSock import JSock
+from .JSock import JSock
 import time
 
 # Preferences
