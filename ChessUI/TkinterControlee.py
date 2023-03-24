@@ -10,6 +10,14 @@ root = None
 jsock = None
 canvas = None
 
+# Global Variables
+halfGridSize = None
+root = None
+canvas = None
+jsock = None
+width = None
+height = None
+
 
 def CreateWindow(width, height, title):
     root = tk.Tk()
@@ -103,7 +111,9 @@ def IntervalFunction():
     root.after(1, IntervalFunction)
 
 
-if __name__ == "__main__":
+def TkinterControlee():
+    global highDPI, halfGridSize, root, canvas, jsock, width, height
+
     if highDPI:
         EnableHighDPISupport()
 
@@ -147,3 +157,7 @@ if __name__ == "__main__":
     root.after(1, IntervalFunction)
 
     root.mainloop()
+
+
+if __name__ == "__main__":
+    TkinterControlee()

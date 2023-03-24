@@ -107,7 +107,7 @@ def ControleeServer():
             pass
 
 
-if __name__ == "__main__":
+def BridgeServer():
 
     # Start Server Threads
     _thread.start_new_thread(ControllerServer, ())
@@ -116,3 +116,7 @@ if __name__ == "__main__":
     # Main Loop
     while not closeBridgeServer:
         time.sleep(1)
+
+
+if __name__ == "__main__":
+    BridgeServer()
