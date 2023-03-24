@@ -74,7 +74,7 @@ def MouseClickCallback(event):
 
     i = my // (2 * halfGridSize)
     j = mx // (2 * halfGridSize)
-    print(i, j)
+    # print(i, j)
 
     # CreatePiece(canvas, i, j, halfGridSize, fill="black", outline="black")
     jsock.SendStr("SetAction")
@@ -118,13 +118,13 @@ def TkinterControlee():
         EnableHighDPISupport()
 
     screenResolution = GetScreenResolution()
-    print(screenResolution)
+    # print(screenResolution)
 
     if highDPI:
         halfGridSize = int(0.03 * screenResolution[1])
     else:
         halfGridSize = 15
-    print(halfGridSize)
+    # print(halfGridSize)
 
     # Get Chessboard Size
     jsock = JSock()
@@ -134,7 +134,7 @@ def TkinterControlee():
     while True:
         jsock.SendStr("GetSize")
         result = jsock.RecvStr()
-        print(result)
+        # print(result)
         if result != "NoNewSize":
             result = json.loads(result)
             width = result[0]

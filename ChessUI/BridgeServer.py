@@ -35,12 +35,12 @@ def ControllerServer():
                     if msg == "SetState":
                         state = json.loads(jsock.RecvStr())
                         hasNewState = True
-                        print(state)
+                        # print(state)
 
                     elif msg == "SetSize":
                         size = json.loads(jsock.RecvStr())
                         hasNewSize = True
-                        print("Size:", size)
+                        # print("Size:", size)
 
                     elif msg == "GetAction":
                         if hasNewAction:
@@ -50,7 +50,7 @@ def ControllerServer():
                             jsock.SendStr("NoNewAction")
 
         except BaseException:
-            print("An Error Occurred in Controller Server, Controller Client Might Be Closed.")
+            # print("An Error Occurred in Controller Server, Controller Client Might Be Closed.")
             wannaClose = True  # Set the wannaClose, wait for the Controlee to set closeBridgeServer
             pass
 
@@ -98,10 +98,10 @@ def ControleeServer():
                     elif msg == "SetAction":
                         action = json.loads(jsock.RecvStr())
                         hasNewAction = True
-                        print(action)
+                        # print(action)
 
         except BaseException:
-            print("An Error Occurred in Controlee Server, Controlee Client Might Be Closed.")
+            # print("An Error Occurred in Controlee Server, Controlee Client Might Be Closed.")
             wannaClose = True  # Set the wannaClose
             closeBridgeServer = True  # Don't need to wait for the Controller, just set closeBridgeServer
             pass

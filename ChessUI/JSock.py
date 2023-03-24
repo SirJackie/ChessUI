@@ -7,7 +7,7 @@ class JSock:
     s = None
     clientSocket = None
 
-    def __init__(self, debug_=True):
+    def __init__(self, debug_=False):
         self.debug = debug_
         # Create Socket Object
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
