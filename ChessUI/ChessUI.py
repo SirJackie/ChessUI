@@ -25,7 +25,7 @@ class ChessUI:
         self.tkinterControlee.start()
 
         # Connect to the Bridge Server
-        self.jsock = JSock()
+        self.jsock = JSock(debug_=False)
         self.jsock.Connect("127.0.0.1", 16520)
 
         # Send SetSize Request

@@ -20,7 +20,7 @@ def ControllerServer():
     global state, hasNewState, action, hasNewAction, size, hasNewSize
     global closeBridgeServer, wannaClose
 
-    jsock = JSock()
+    jsock = JSock(debug_=False)
     jsock.StartServer(16520)
 
     while True:
@@ -59,7 +59,7 @@ def ControleeServer():
     global state, hasNewState, action, hasNewAction, size, hasNewSize
     global closeBridgeServer, wannaClose
 
-    jsock = JSock()
+    jsock = JSock(debug_=False)
     jsock.StartServer(16521)
 
     while True:
