@@ -1,6 +1,6 @@
 import os
 import json
-from ChessUI.JSock import JSock
+from .JSock import JSock
 import time
 
 
