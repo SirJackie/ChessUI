@@ -21,7 +21,7 @@ height = None
 
 def CreateWindow(width, height, title):
     root = tk.Tk()
-    root.geometry(str(width) + "x" + str(height))
+    root.geometry(str(width) + "x" + str(height) + "+10+10")
     root.title(title)
     return root
 
@@ -120,12 +120,6 @@ def TkinterControlee():
     screenResolution = GetScreenResolution()
     # print(screenResolution)
 
-    if highDPI:
-        halfGridSize = int(0.03 * screenResolution[1])
-    else:
-        halfGridSize = 15
-    # print(halfGridSize)
-
     # Get Chessboard Size
     jsock = JSock(debug_=False)
     jsock.Connect("127.0.0.1", 16521)
@@ -142,6 +136,15 @@ def TkinterControlee():
             break
         else:
             time.sleep(0.01)
+
+    if highDPI:
+        halfGridSize_Mode1 = int(0.03 * screenResolution[1])
+        halfGridSize_Mode2 = int(0.5 * 0.95 * screenResolution[1] / height)
+        halfGridSize_Mode3 = int(0.5 * 0.95 * screenResolution[0] / width)
+        halfGridSize = min(halfGridSize_Mode1, halfGridSize_Mode2, halfGridSize_Mode3)
+    else:
+        halfGridSize = 15
+    # print(halfGridSize)
 
     winWidth = width * 2 * halfGridSize
     winHeight = height * 2 * halfGridSize

@@ -2,8 +2,11 @@ from ChessUI.ChessUI import ChessUI
 
 if __name__ == "__main__":
 
-    state = [[0 for j in range(0, 10)] for i in range(0, 5)]
-    ui = ChessUI(5, 10)
+    iMax = 200
+    jMax = 200
+
+    state = [[0 for j in range(0, jMax)] for i in range(0, iMax)]
+    ui = ChessUI(iMax, jMax)
 
     while True:
         i, j = ui.GetAction()
