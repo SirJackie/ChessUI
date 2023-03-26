@@ -40,7 +40,7 @@ class ChessUI:
             self.jsock.SendStr("GetAction")
             result = self.jsock.RecvStr()
             if result == "NoNewAction":
-                time.sleep(0.01)
+                pass
             else:
                 break
 

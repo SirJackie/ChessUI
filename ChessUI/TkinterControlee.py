@@ -135,7 +135,7 @@ def TkinterControlee():
             height = result[1]
             break
         else:
-            time.sleep(0.01)
+            pass
 
     if highDPI:
         halfGridSize_Mode1 = int(0.03 * screenResolution[1])
