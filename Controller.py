@@ -2,8 +2,8 @@ from ChessUI.ChessUI import ChessUI
 
 if __name__ == "__main__":
 
-    iMax = 200
-    jMax = 200
+    iMax = 5
+    jMax = 10
 
     state = [[0 for j in range(0, jMax)] for i in range(0, iMax)]
     ui = ChessUI(iMax, jMax)
