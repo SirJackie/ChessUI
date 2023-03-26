@@ -1,5 +1,5 @@
 import tkinter as tk
-from .NativeAPI import EnableHighDPISupport, GetScreenResolution
+from .NativeAPI import EnableHighDPIMode, GetScreenResolution
 import json
 from .JSock import JSock
 import time
@@ -115,7 +115,7 @@ def TkinterControlee():
     global highDPI, halfGridSize, root, canvas, jsock, width, height
 
     if highDPI:
-        EnableHighDPISupport()
+        EnableHighDPIMode()
 
     screenResolution = GetScreenResolution()
     # print(screenResolution)
